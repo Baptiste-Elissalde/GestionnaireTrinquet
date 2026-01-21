@@ -9,7 +9,6 @@ let bissextile a =
   | true , false -> true
   | false , true -> true
   | _ , _ -> false
-  
 
 let nbjour m a= 
   let bis = bissextile a in 

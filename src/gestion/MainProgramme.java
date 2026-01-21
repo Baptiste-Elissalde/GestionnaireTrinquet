@@ -4,29 +4,24 @@ import agenda.Calendrier;
 
 import agenda.Date;
 import agenda.Jour;
+import dao.GestionnaireCSV;
+import dao.OcamlCaller;
+
 import java.util.Scanner;
 public class MainProgramme {
 	
 	public static void main(String[] args) {
+		System.out.println("Attendez le chargement de la base de données (environ 1 min max)");
+		OcamlCaller.creerExecutable();
 		Scanner scanner = new Scanner(System.in);
-
-        BaseDeDonnee base = new BaseDeDonnee();
-
+		GestionnaireCSV gestionnaire = new GestionnaireCSV();
+        BaseDeDonnee base = new BaseDeDonnee(gestionnaire);
         System.out.println("=== BIENVENUE AU SERVICE DE RESERVATION === ");
         System.out.println("Paul Sabatier unibertsitateko Baptiste Elissalde ikasleak egina\n\n");
         System.out.println("ATTENTION si le logiciel vous ddemande un nombre et que vous donnez autre chose par ");
         System.out.println("exemple des caracteres le logiciel plantera, j en decline toute responsabilité \n");
-
-        // Client
-        System.out.print("Entrez votre nom : ");
-        String nom = scanner.nextLine();
-
-        System.out.print("Entrez votre prénom : ");
-        String prenom = scanner.nextLine();
-
-        Client client = new Client(nom, prenom);
-        System.out.println("\nBonjour " + client.NomPrenom());
-        client.afficherIdentifiant();
+        
+        Client client = base.saisiClient(scanner);
         int menu = 0;
          //choix de l option
         while (menu != 4) {
@@ -40,7 +35,7 @@ public class MainProgramme {
             if(menu == 1) {
             	base.afficherTrinquetsTries();
             	Trinquet trinquet = base.saisiTrinquet(scanner, client);
-            	base.saisiReserver(trinquet, scanner, client);
+            	base.saisiReserver(trinquet, scanner, client,gestionnaire);
             	menu = 0;
             }
             if(menu == 2) {
@@ -63,7 +58,7 @@ public class MainProgramme {
                     }
                 }
                 Trinquet trinquet = ville.getTrinquet(iTrinquet);
-                base.saisiReserver(trinquet,scanner, client);
+                base.saisiReserver(trinquet,scanner, client,gestionnaire);
             }
             if(menu == 3) {
             	client.afficherReservation();

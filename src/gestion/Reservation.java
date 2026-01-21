@@ -8,6 +8,7 @@ public class Reservation {
 	private String nomTrinquet;
 	private Client client;
 	
+	//Constructeur
 	public Reservation(Client client,Trinquet trinquet,int ihoraire,int ijour) {
 		trinquet.getPlanning().getHoraireJour(ihoraire, ijour).reserverHoraire(client);
 		trinquet.getPlanning().getJour(ijour).setPlein();
@@ -18,11 +19,13 @@ public class Reservation {
 		this.nomTrinquet = trinquet.getNom() + " à " + trinquet.getVille().getNom();
 	}
 	
+	//fonctions affichage
 	public void afficherReservation() {
 		System.out.println("Reservation au nom de " + this.client.NomPrenom() + " au trinquet " +this.nomTrinquet+" le "+ this.date.afficherDate());
 		this.horaire.afficherHoraire();
 	}
 	
+	//getter
 	public Client getClient() {
 		return client;
 	}

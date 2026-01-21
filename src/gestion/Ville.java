@@ -6,22 +6,24 @@ public class Ville {
 	private Trinquet[] trinquets;
 	private boolean plein;
 	
+	//constructeur
 	public Ville(String nom) {
 		this.nom = nom;
 		this.nbtrinquet = 0;
 		this.plein = false;
-		this.trinquets = new Trinquet[10];
+		this.trinquets = new Trinquet[5];
 	}
 	
+	//manipulations des trinquets
 	public void ajouterTrinquet(Trinquet trinquet) {
 		this.trinquets[nbtrinquet] = trinquet;
 		this.nbtrinquet++;
 	}
 	
+	//Fonctions getter
 	public String getNom() {
 		return this.nom;
 	}
-	
 	public int getNbtrinquet() {
 		return nbtrinquet;
 	}
@@ -30,6 +32,7 @@ public class Ville {
 		return trinquets[i];
 	}
 	
+	//Fonctions d affichage
 	public void afficherTrinquet() {
 		for(int i =0;i<this.nbtrinquet;i++) {
 			trinquets[i].afficherNom();
